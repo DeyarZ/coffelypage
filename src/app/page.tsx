@@ -1,37 +1,48 @@
-import Image from "next/image";
+// Modular components for Coffely landing page
+import Image from 'next/image';
+import HeroSection from '@/components/HeroSection';
+import FeaturesSection from '@/components/FeaturesSection';
+import PartnershipSection from '@/components/PartnershipSection';
+import HighlightsSection from '@/components/HighlightsSection';
+import CtaSection from '@/components/CtaSection';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#39FF14] flex flex-col items-center justify-center p-8">
-      <main className="max-w-4xl mx-auto text-black">
-        <h1 className="text-6xl font-bold mb-8 text-center">COFFELY</h1>
-        
-        <div className="bg-black/10 backdrop-blur-sm p-8 rounded-xl">
-          <h2 className="text-3xl font-bold mb-4">Das Kaffeeparadoxon</h2>
-          
-          <p className="text-xl mb-6">
-            Kaffee ist nicht nur ein Getränk, sondern ein interdimensionales Portal zu einer Welt, in der Produktivität und Wahnvorstellungen gleichzeitig existieren.
-          </p>
-          
-          <p className="text-xl mb-6">
-            Wissenschaftler haben herausgefunden, dass jede Tasse Kaffee ein Quantenphänomen auslöst, bei dem Ihre Gedanken gleichzeitig brillant und völlig wirr sind. Einstein nannte es "die kaffeeinische Verschränkung".
-          </p>
-          
-          <p className="text-xl mb-6">
-            Unsere Bohnen werden von hyperintelligenten Eichhörnchen gepflückt, die nächtelang Kafka lesen und tagsüber Schach gegen sich selbst spielen. Sie schmecken nach Vanille, Schokolade und leichter existenzieller Krise.
-          </p>
-          
-          <p className="text-xl mb-6">
-            Jeder Schluck unseres Kaffees ist wie ein kleiner Urknall in Ihrem Gehirn - eine Explosion von Geschmack und die plötzliche Erkenntnis, dass Sie schon immer ein Toaster sein wollten.
-          </p>
+    <main className="flex min-h-screen flex-col items-center justify-between bg-amber-50 overflow-hidden font-['Inter',sans-serif]">
+      {/* Coffee bean background decoration */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-5">
+        <div className="absolute top-20 left-20 rotate-12">
+          <Image src="/images/leo-stamp.png" alt="Coffee bean" width={100} height={100} />
         </div>
-        
-        <div className="mt-12 text-center">
-          <button className="bg-black text-[#39FF14] px-8 py-4 rounded-full text-xl font-bold hover:scale-105 transition-transform">
-            JETZT ABSURD WERDEN
-          </button>
+        <div className="absolute top-60 right-40 -rotate-12">
+          <Image src="/images/leo-stamp.png" alt="Coffee bean" width={80} height={80} />
         </div>
-      </main>
-    </div>
+        <div className="absolute bottom-40 left-40 rotate-45">
+          <Image src="/images/leo-stamp.png" alt="Coffee bean" width={120} height={120} />
+        </div>
+        <div className="absolute bottom-80 right-20 -rotate-45">
+          <Image src="/images/leo-stamp.png" alt="Coffee bean" width={90} height={90} />
+        </div>
+      </div>
+
+      {/* Hero Section */}
+      <HeroSection />
+      
+      {/* Features Section - What Coffely offers */}
+      <FeaturesSection />
+      
+      {/* Partnership Section - Why cooperate with Coffely */}
+      <PartnershipSection />
+      
+      {/* Highlights Section */}
+      <HighlightsSection />
+      
+      {/* CTA Section */}
+      <CtaSection />
+      
+      {/* Footer */}
+      <Footer />
+    </main>
   );
 }
