@@ -24,8 +24,20 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
-  viewport: "width=device-width, initial-scale=1",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
   themeColor: "#B45309",
+  appleWebApp: {
+    title: "Coffely App",
+    statusBarStyle: "black-translucent",
+  },
+  openGraph: {
+    title: "Coffely - Digitale Kaffeestempel App",
+    description: "Tracke deinen Kaffeekonsum & sammle digitale Stempel bei deinem Lieblingscafé.",
+    url: "https://coffely.app",
+    siteName: "Coffely",
+    locale: "de_DE",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -35,7 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className="scroll-smooth">
-      <body className={`${inter.className} ${manrope.variable} ${inter.variable} antialiased selection:bg-amber-200 selection:text-amber-900`}>
+      <body className={`${inter.className} ${manrope.variable} ${inter.variable} antialiased selection:bg-amber-200 selection:text-amber-900 overflow-x-hidden`}>
         {children}
       </body>
     </html>

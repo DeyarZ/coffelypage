@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -13,6 +13,25 @@ export default function ContactForm() {
     success: false,
     message: ''
   });
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Responsive design detection
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkIfMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', checkIfMobile);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -69,12 +88,12 @@ export default function ContactForm() {
     <div>
       {submitStatus.message && (
         <div style={{
-          padding: '15px',
-          marginBottom: '20px',
+          padding: isMobile ? '12px' : '15px',
+          marginBottom: isMobile ? '15px' : '20px',
           borderRadius: '8px',
           backgroundColor: submitStatus.success ? 'rgba(34, 197, 94, 0.2)' : 'rgba(239, 68, 68, 0.2)',
           color: submitStatus.success ? 'rgb(22, 101, 52)' : 'rgb(153, 27, 27)',
-          fontSize: 'clamp(16px, 1.8vw, 18px)'
+          fontSize: isMobile ? '16px' : '18px'
         }}>
           {submitStatus.message}
         </div>
@@ -83,16 +102,16 @@ export default function ContactForm() {
       <form onSubmit={handleSubmit} style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '20px'
+        gap: isMobile ? '15px' : '20px'
       }}>
         <div>
           <label 
             htmlFor="name" 
             style={{
               display: 'block',
-              fontSize: 'clamp(16px, 1.8vw, 18px)',
+              fontSize: isMobile ? '16px' : '18px',
               fontWeight: '500',
-              marginBottom: '8px',
+              marginBottom: isMobile ? '6px' : '8px',
               color: '#292524'
             }}
           >
@@ -107,8 +126,8 @@ export default function ContactForm() {
             required
             style={{
               width: '100%',
-              padding: '12px 16px',
-              fontSize: 'clamp(15px, 1.8vw, 18px)',
+              padding: isMobile ? '10px 14px' : '12px 16px',
+              fontSize: isMobile ? '16px' : '18px',
               borderRadius: '8px',
               border: '1px solid #d6d3d1',
               backgroundColor: 'white'
@@ -121,9 +140,9 @@ export default function ContactForm() {
             htmlFor="email" 
             style={{
               display: 'block',
-              fontSize: 'clamp(16px, 1.8vw, 18px)',
+              fontSize: isMobile ? '16px' : '18px',
               fontWeight: '500',
-              marginBottom: '8px',
+              marginBottom: isMobile ? '6px' : '8px',
               color: '#292524'
             }}
           >
@@ -138,8 +157,8 @@ export default function ContactForm() {
             required
             style={{
               width: '100%',
-              padding: '12px 16px',
-              fontSize: 'clamp(15px, 1.8vw, 18px)',
+              padding: isMobile ? '10px 14px' : '12px 16px',
+              fontSize: isMobile ? '16px' : '18px',
               borderRadius: '8px',
               border: '1px solid #d6d3d1',
               backgroundColor: 'white'
@@ -152,9 +171,9 @@ export default function ContactForm() {
             htmlFor="message" 
             style={{
               display: 'block',
-              fontSize: 'clamp(16px, 1.8vw, 18px)',
+              fontSize: isMobile ? '16px' : '18px',
               fontWeight: '500',
-              marginBottom: '8px',
+              marginBottom: isMobile ? '6px' : '8px',
               color: '#292524'
             }}
           >
@@ -166,11 +185,11 @@ export default function ContactForm() {
             value={formData.message}
             onChange={handleChange}
             required
-            rows={5}
+            rows={isMobile ? 4 : 5}
             style={{
               width: '100%',
-              padding: '12px 16px',
-              fontSize: 'clamp(15px, 1.8vw, 18px)',
+              padding: isMobile ? '10px 14px' : '12px 16px',
+              fontSize: isMobile ? '16px' : '18px',
               borderRadius: '8px',
               border: '1px solid #d6d3d1',
               backgroundColor: 'white',
@@ -185,16 +204,15 @@ export default function ContactForm() {
           style={{
             backgroundColor: '#B45309',
             color: 'white',
-            fontSize: 'clamp(16px, 1.8vw, 18px)',
+            fontSize: isMobile ? '16px' : '18px',
             fontWeight: 'bold',
-            padding: '12px 24px',
+            padding: isMobile ? '12px 24px' : '14px 28px',
             borderRadius: '30px',
             border: 'none',
             cursor: isSubmitting ? 'wait' : 'pointer',
             opacity: isSubmitting ? 0.7 : 1,
             alignSelf: 'center',
-            marginTop: '10px',
-            width: 'clamp(200px, 50%, 280px)'
+            marginTop: isMobile ? '5px' : '10px'
           }}
         >
           {isSubmitting ? 'Wird gesendet...' : 'Nachricht senden'}

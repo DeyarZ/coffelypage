@@ -32,16 +32,20 @@ module.exports = {
         scale: {
           '102': '1.02',
         },
-        utilities: {
+      },
+    },
+    plugins: [
+      function({ addUtilities }) {
+        const newUtilities = {
           '.animation-delay-300': {
             'animation-delay': '300ms',
           },
           '.animation-delay-600': {
             'animation-delay': '600ms',
           },
-        },
-      },
-    },
-    plugins: [],
+        }
+        addUtilities(newUtilities)
+      }
+    ],
   };
   
